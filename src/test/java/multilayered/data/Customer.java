@@ -70,4 +70,10 @@ public class Customer {
         public Builder withPassword(String password) { Customer.this.password = password; return this; }
         public Customer build() {return Customer.this; }
     }
+
+    @Override
+    public String toString()
+    {
+        return firstname + " " + lastname;
+    }
 }
