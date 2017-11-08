@@ -9,12 +9,30 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
+import static org.junit.Assert.assertTrue;
+
 @RunWith(DataProviderRunner.class)
 public class CustomerRegistrationTests extends TestBase {
 
     @Test
     @UseDataProvider(value = "validCustomers", location = DataProviders.class)
     public void canRegisterCustomer(Customer customer) {
+        driver.get("http://192.168.56.101/litecart/admin");
+        if (driver.findElements(By.id("box-login")).size() > 0) {
+            driver.findElement(By.name("username")).sendKeys("admin");
+            driver.findElement(By.name("password")).sendKeys("admin");
+            driver.findElement(By.name("login")).click();
+            wait.until((WebDriver d) -> d.findElement(By.id("box-apps-menu")));
+        }
+
+        driver.get("http://192.168.56.101/litecart/admin/?app=customers&doc=customers");
+        Set<String> oldIds = driver.findElements(By.cssSelector("table.dataTable tr.row")).stream()
+                .map(e -> e.findElements(By.tagName("td")).get(2).getText())
+                .collect(toSet());
+
         driver.get("http://192.168.56.101/litecart/en/create_account");
         driver.findElement(By.name("firstname")).sendKeys(customer.getFirstname());
         driver.findElement(By.name("lastname")).sendKeys(customer.getLastname());
@@ -34,6 +52,13 @@ public class CustomerRegistrationTests extends TestBase {
         driver.findElement(By.name("password")).sendKeys(customer.getPassword());
         driver.findElement(By.name("confirmed_password")).sendKeys(customer.getPassword());
         driver.findElement(By.name("create_account")).click();
-    }
 
+        driver.get("http://192.168.56.101/litecart/admin/?app=customers&doc=customers");
+        Set<String> newIds = driver.findElements(By.cssSelector("table.dataTable tr.row")).stream()
+                .map(e -> e.findElements(By.tagName("td")).get(2).getText())
+                .collect(toSet());
+
+        assertTrue(newIds.containsAll(oldIds));
+        assertTrue(newIds.size() == oldIds.size() + 1);
+    }
 }
