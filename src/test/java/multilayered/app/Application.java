@@ -7,10 +7,10 @@ import multilayered.pages.CustomerListPage;
 import multilayered.pages.RegistrationPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.util.Set;
 
 public class Application {
-
 
     private WebDriver driver;
 
@@ -32,18 +32,18 @@ public class Application {
 
     public void registerNewCustomer(Customer customer) {
         registrationPage.open();
-        registrationPage.firstnameInput().sendKeys(customer.getFirstname());
-        registrationPage.lastnameInput().sendKeys(customer.getLastname());
-        registrationPage.address1Input().sendKeys(customer.getAddress());
-        registrationPage.postcodeInput().sendKeys(customer.getPostcode());
-        registrationPage.cityInput().sendKeys(customer.getCity());
+        registrationPage.firstnameInput.sendKeys(customer.getFirstname());
+        registrationPage.lastnameInput.sendKeys(customer.getLastname());
+        registrationPage.address1Input.sendKeys(customer.getAddress());
+        registrationPage.postcodeInput.sendKeys(customer.getPostcode());
+        registrationPage.cityInput.sendKeys(customer.getCity());
         registrationPage.selectCountry(customer.getCountry());
         registrationPage.selectZone(customer.getZone());
-        registrationPage.emailInput().sendKeys(customer.getEmail());
-        registrationPage.phoneInput().sendKeys(customer.getPhone());
-        registrationPage.passwordInput().sendKeys(customer.getPassword());
-        registrationPage.confirmedPasswordInput().sendKeys(customer.getPassword());
-        registrationPage.createAccountButton().click();
+        registrationPage.emailInput.sendKeys(customer.getEmail());
+        registrationPage.phoneInput.sendKeys(customer.getPhone());
+        registrationPage.passwordInput.sendKeys(customer.getPassword());
+        registrationPage.confirmedPasswordInput.sendKeys(customer.getPassword());
+        registrationPage.createAccountButton.click();
     }
 
     public Set<String> getCustomerIds() {
@@ -53,4 +53,5 @@ public class Application {
 
         return customerListPage.open().getCustomerIds();
     }
+
 }
