@@ -10,7 +10,7 @@ public class AdminPanelLoginPage extends Page {
     }
 
     public AdminPanelLoginPage open() {
-        driver.get("http://192.168.56.101/litecart/admin");
+        driver.get(baseUrl+ "/admin");
         return this;
     }
 

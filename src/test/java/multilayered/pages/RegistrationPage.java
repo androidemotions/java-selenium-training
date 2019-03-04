@@ -15,7 +15,7 @@ public class RegistrationPage extends Page {
     }
 
     public void open() {
-        driver.get("http://192.168.56.101/litecart/en/create_account");
+        driver.get(baseUrl+ "/en/create_account");
     }
 
     @FindBy(name="firstname")

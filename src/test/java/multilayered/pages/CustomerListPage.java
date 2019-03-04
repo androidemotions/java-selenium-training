@@ -19,7 +19,7 @@ public class CustomerListPage extends Page {
     }
 
     public CustomerListPage open() {
-        driver.get("http://192.168.56.101/litecart/admin/?app=customers&doc=customers");
+        driver.get(baseUrl + "/admin/?app=customers&doc=customers");
         return this;
     }
 

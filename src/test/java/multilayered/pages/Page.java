@@ -7,6 +7,7 @@ public class Page {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected String baseUrl = "http://localhost/litecart";
 
     public Page(WebDriver driver) {
         this.driver = driver;
