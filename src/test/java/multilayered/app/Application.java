@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import multilayered.data.Customer;
 import multilayered.pages.AdminPanelLoginPage;
 import multilayered.pages.CustomerListPage;
+import multilayered.pages.MainStorePage;
 import multilayered.pages.RegistrationPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +18,7 @@ public class Application {
     private RegistrationPage registrationPage;
     private final AdminPanelLoginPage adminPanelLoginPage;
     private CustomerListPage customerListPage;
+    private MainStorePage mainPage;
 
     public Application() {
         ChromeDriverManager.getInstance().setup();
@@ -24,6 +26,7 @@ public class Application {
         registrationPage = new RegistrationPage(driver);
         adminPanelLoginPage = new AdminPanelLoginPage(driver);
         customerListPage = new CustomerListPage(driver);
+        mainPage = new MainStorePage(driver);
     }
 
     public void quit() {
@@ -44,6 +47,8 @@ public class Application {
         registrationPage.passwordInput.sendKeys(customer.getPassword());
         registrationPage.confirmedPasswordInput.sendKeys(customer.getPassword());
         registrationPage.createAccountButton.click();
+
+        mainPage.logoutCurrentUser();
     }
 
     public Set<String> getCustomerIds() {

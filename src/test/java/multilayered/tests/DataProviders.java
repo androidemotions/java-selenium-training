@@ -14,6 +14,12 @@ public class DataProviders {
                         .withCountry("US").withZone("KS")
                         .withEmail("adam" + System.currentTimeMillis() + "@smith.me")
                         .withPassword("qwerty").build()},
+                {Customer.newEntity()
+                        .withFirstname("John").withLastname("Connor").withPhone("+0000000001")
+                        .withAddress("Los Angeles").withPostcode("00000").withCity("Terminator")
+                        .withCountry("US").withZone("KS")
+                        .withEmail("terminator" + System.currentTimeMillis() + "@smith.me")
+                        .withPassword("qwerty").build()}
                 /* ... */
         };
     }
